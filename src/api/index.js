@@ -1,7 +1,11 @@
-const BASE_URL = 'http://127.0.0.1';
+// const BASE_URL = 'http://127.0.0.1';
+const BASE_URL = import.meta.env.VITE_BASE_URL || '';
 
 const TAG_DATA = {};
-let ALL_STAR_REPO = [];
+const ALL_STAR_REPO = [];
+
+console.log(BASE_URL)
+console.log(import.meta.env)
 
 async function getUser() {
     const resp = await fetch(`${BASE_URL}/api/user`);
@@ -88,7 +92,7 @@ async function _loadAllStarRepo() {
         const resp = await fetch(`${BASE_URL}/api/getAllStarRepo`);
         const data = await resp.json();
         _checkResp(data);
-        ALL_STAR_REPO = data;
+        ALL_STAR_REPO.push(...data);
     } finally {
         await _releaseLock('_loadAllStarRepo');
     }
