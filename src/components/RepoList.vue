@@ -90,7 +90,7 @@ onUnmounted(() => {
   <div class="repo-list">
     <div v-for="repo in filteredRepos" :key="repo.name" class="repo-item" :class="{ 'repo-selected': repo.name === selectedRepo.name }" @click="handleRepoSelect(repo)">
       <div class="repo-header">
-        <h3>{{ repo.name }}</h3>
+        <h3><a :href="`https://github.com/${ repo.name }`" target="_blank">{{ repo.name }}</a></h3>
         <button class="tag-menu-btn" @click="toggleTagMenu(repo.name, $event)" title="Manage tags">
           +
         </button>
