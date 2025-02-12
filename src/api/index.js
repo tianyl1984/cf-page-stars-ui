@@ -111,6 +111,10 @@ async function _releaseLock(key) {
 
 async function _saveTagRepo() {
     console.log(TAG_DATA);
+    await fetch(`${BASE_URL}/api/saveTagRepo`, {
+        method: 'POST',
+        body: JSON.stringify(TAG_DATA)
+    });
 }
 
 async function getLanguages() {
