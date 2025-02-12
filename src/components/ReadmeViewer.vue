@@ -21,9 +21,7 @@ watch(() => props.repo, async (newRepo) => {
 
 <template>
   <div class="readme-viewer">
-    <div class="readme-content">
-      <pre>{{ readme }}</pre>
-    </div>
+    <div class="readme-content" v-html="readme"></div>
   </div>
 </template>
 

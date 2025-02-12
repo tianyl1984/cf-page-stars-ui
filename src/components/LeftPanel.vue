@@ -15,7 +15,7 @@ const sortMode = ref(false);
 
 // Menu collapse states
 const isTagsExpanded = ref(true);
-const isLanguageExpanded = ref(true);
+const isLanguageExpanded = ref(false);
 
 // Language menu data
 const languages = ref([]);
@@ -108,7 +108,7 @@ onMounted(init);
     <div class="menu-container">
       <div class="menu">
         <div class="menu-item" :class="{ active: selectedMenu === 'all' }" @click="handleMenuSelect('all')">
-          All Repositories
+          All Repos
         </div>
         <div class="menu-item" :class="{ active: selectedMenu === 'untagged' }" @click="handleMenuSelect('untagged')">
           Untagged
@@ -118,7 +118,7 @@ onMounted(init);
         <div class="tags-section">
           <div class="tags-header" @click="isTagsExpanded = !isTagsExpanded">
             <div class="header-content">
-              <span>MYTAG</span>
+              <span>My Tags</span>
               <span class="expand-icon">{{ isTagsExpanded ? '▼' : '▶' }}</span>
             </div>
             <div class="tag-buttons" v-if="isTagsExpanded">
@@ -171,7 +171,7 @@ onMounted(init);
         <!-- Language Section -->
         <div class="menu-section">
           <div class="menu-header" @click="isLanguageExpanded = !isLanguageExpanded">
-            <span>LANGUAGE</span>
+            <span>Language</span>
             <span class="expand-icon">{{ isLanguageExpanded ? '▼' : '▶' }}</span>
           </div>
 
@@ -189,7 +189,7 @@ onMounted(init);
     <!-- Fixed Footer -->
     <div class="fixed-footer">
       <div class="logout">
-        <button @click="() => alert('Logout clicked')">Logout</button>
+        <button @click="() => api.logout()">Logout</button>
       </div>
     </div>
   </div>

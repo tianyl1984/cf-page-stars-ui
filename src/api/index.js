@@ -4,9 +4,6 @@ const BASE_URL = import.meta.env.VITE_BASE_URL || '';
 const TAG_DATA = {};
 const ALL_STAR_REPO = [];
 
-console.log(BASE_URL)
-console.log(import.meta.env)
-
 async function getUser() {
     const resp = await fetch(`${BASE_URL}/api/user`);
     const data = await resp.json();
@@ -192,6 +189,10 @@ function _checkResp(data) {
     }
 }
 
+function logout(){
+    window.location.href = `${BASE_URL}/logout`;
+}
+
 export default {
     getUser,
     getTags,
@@ -203,4 +204,5 @@ export default {
     addRepoTag,
     deleteRepoTag,
     getReadme,
+    logout,
 }
