@@ -33,7 +33,7 @@ const fetchTags = () => {
 }
 
 const fetchLanguages = async () => {
-  languages.value = await api.getLanguages();
+  languages.value = await withLoading(() => api.getLanguages());
 }
 
 const emit = defineEmits(['menuSelect', 'update:isLoading']);
@@ -91,7 +91,7 @@ const toggleSortMode = () => {
 const withLoading = async (fun) => {
   updateLoading(true);
   try {
-    await fun();
+    return await fun();
   } finally {
     updateLoading(false);
   }
