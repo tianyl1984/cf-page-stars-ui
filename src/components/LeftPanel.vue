@@ -20,19 +20,23 @@ const isLanguageExpanded = ref(false);
 // Language menu data
 const languages = ref([]);
 
+const props = defineProps({
+  isLoading: Boolean,
+});
+
 const fetchUser = async () => {
   user.value = await api.getUser();
 }
 
-const fetchTags = async () => {
-  await tagStore.fetchTags();
+const fetchTags = () => {
+  withLoading(() => tagStore.fetchTags());
 }
 
 const fetchLanguages = async () => {
   languages.value = await api.getLanguages();
 }
 
-const emit = defineEmits(['menuSelect']);
+const emit = defineEmits(['menuSelect', 'update:isLoading']);
 
 const handleMenuSelect = (menu, tag = null) => {
   selectedMenu.value = tag ? `tag-${tag}` : menu;
@@ -82,6 +86,19 @@ const deleteTag = async (tagToDelete) => {
 
 const toggleSortMode = () => {
   sortMode.value = !sortMode.value;
+};
+
+const withLoading = async (fun) => {
+  updateLoading(true);
+  try {
+    await fun();
+  } finally {
+    updateLoading(false);
+  }
+}
+
+const updateLoading = (status) => {
+  emit('update:isLoading', status);
 };
 
 const init = async () => {
