@@ -28,8 +28,8 @@ const fetchUser = async () => {
   user.value = await api.getUser();
 }
 
-const fetchTags = () => {
-  withLoading(() => tagStore.fetchTags());
+const fetchTags = async () => {
+  await tagStore.fetchTags();
 }
 
 const fetchLanguages = async () => {
